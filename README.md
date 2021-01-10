@@ -1,70 +1,63 @@
-# Getting Started with Create React App
+# React.js/TypeScript - Ayame Labo Recieve only Example
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+React.js and TypeScript exmaple for [Ayame Labo](https://ayame-labo.shiguredo.jp).
 
-## Available Scripts
+これは WebRTCシグナリングサービスの[Ayame Labo](https://ayame-labo.shiguredo.jp) 向けの、React.js/TypeScript によるサンプルです。
 
-In the project directory, you can run:
+- [ayame-web-sdk](https://github.com/OpenAyame/ayame-web-sdk) を利用しています(Apache 2.0 ライセンス)
 
-### `npm start`
+## LICENSE / ライセンス
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- MIT LICENSE / MITライセンス
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
+# 利用方法
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 事前準備
 
-### `npm run build`
+- GitHub アカウントで、[Ayame Labo](https://ayame-labo.shiguredo.jp) にサインアップ
+- シグナリングキーを取得
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## GitHub Pages で実行
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+送信側
+- ブラウザを起動、 https://mganeko.github.io/reactjs_ayame/ にアクセス
+- SignalingKey: に Ayame Labo のシグナリングキーを入力
+- Room: にルーム名(Channel名)を入力
+  - Username@RoomID の形式 
+- [Start Video]ボタンをクリック
+- [Coonect]ボタンをクリックして接続
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+受信側
 
-### `npm run eject`
+- ブラウザを起動、 https://mganeko.github.io/react_ts_ayame_recv/ にアクセス
+- SignalingKey: に Ayame Labo のシグナリングキーを入力
+- Room: にルーム名(Channel名)を入力
+  - Username@RoomID の形式 
+- [Coonect]ボタンをクリックして接続
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+URLを次の形式で指定することで、シグナリングキーとルーム名を指定可能
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- https://mganeko.github.io/react_ts_ayame_recv/?room=ルーム名&key=シグナリングキー
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## 開発環境で実行
 
-## Learn More
+- $ git clone https://github.com/mganeko/react_ts_ayame_recv.git
+- $ cd react_ts_ayame_recv
+- $ npm install 
+- $ npm start
+- http:localhost:3000 にブラウザでアクセス
+- その後は GitHub Pages の例と同様 
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 自分のサーバーで実行
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- $ git clone https://github.com/mganeko/react_ts_ayame_recv.git
+- $ cd react_ts_ayame_recv
+- $ npm install 
+- $ npm run build
+- build/ 以下をWebサーバーに配置(要https)
+- 配置したWebサーバーにブラウザーでアクセス
+- その後は GitHub Pages の例と同様 
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
