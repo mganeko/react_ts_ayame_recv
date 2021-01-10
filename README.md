@@ -49,6 +49,7 @@ URLを次の形式で指定することで、シグナリングキーとルー�
 - $ npm start
 - http:localhost:3000 にブラウザでアクセス
 - その後は GitHub Pages の例と同様 
+- ※送信側は、  https://github.com/mganeko/reactjs_ayame.git をクローンして利用
 
 ## 自分のサーバーで実行
 
@@ -59,5 +60,7 @@ URLを次の形式で指定することで、シグナリングキーとルー�
 - build/ 以下をWebサーバーに配置(要https)
 - 配置したWebサーバーにブラウザーでアクセス
 - その後は GitHub Pages の例と同様 
+- ※送信側は、  https://github.com/mganeko/reactjs_ayame.git をクローンして利用
+
 
 
