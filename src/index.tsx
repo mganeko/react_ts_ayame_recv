@@ -100,14 +100,14 @@ class App extends React.Component {
     };
 
     // This binding is necessary to make `this` work in the callback
-    this.startVideoHandler = this.startVideoHandler.bind(this);
-    this.stopVideoHandler = this.stopVideoHandler.bind(this);
-    this.stopVideo = this.stopVideo.bind(this);
+    //this.startVideoHandler = this.startVideoHandler.bind(this);
+    //this.stopVideoHandler = this.stopVideoHandler.bind(this);
+    //this.stopVideo = this.stopVideo.bind(this);
     this.connect = this.connect.bind(this);
     this.disconnect = this.disconnect.bind(this);
     this.handleRoomChange = this.handleRoomChange.bind(this);
     this.handleKeyChange = this.handleKeyChange.bind(this);
-    this.handleCodecChange = this.handleCodecChange.bind(this);
+    //this.handleCodecChange = this.handleCodecChange.bind(this);
 
     // -- Ayame connection --
     this.conn = null;
@@ -120,43 +120,43 @@ class App extends React.Component {
 
   componentWillUnmount() {
     console.log('App WillUnmount()');
-    if (this.localStream) {
-      this.stopVideo();
-    }
+    // if (this.localStream) {
+    //   this.stopVideo();
+    // }
   }
 
   // -----------
 
-  startVideoHandler(e: MouseEvent<HTMLButtonElement>) {
-    e.preventDefault();
-    console.log('start Video');
-    if (this.localStream) {
-      console.warn('localVideo ALREADY started');
-      return;
-    }
+  // startVideoHandler(e: MouseEvent<HTMLButtonElement>) {
+  //   e.preventDefault();
+  //   console.log('start Video');
+  //   if (this.localStream) {
+  //     console.warn('localVideo ALREADY started');
+  //     return;
+  //   }
 
-    const constraints = { video: true, audio: true };
-    navigator.mediaDevices.getUserMedia(constraints)
-      .then(stream => {
-        this.localStream = stream;
-        this.setState({ playing: true });
-      })
-      .catch(err => console.error('media ERROR:', err));
-  }
+  //   const constraints = { video: true, audio: true };
+  //   navigator.mediaDevices.getUserMedia(constraints)
+  //     .then(stream => {
+  //       this.localStream = stream;
+  //       this.setState({ playing: true });
+  //     })
+  //     .catch(err => console.error('media ERROR:', err));
+  // }
 
-  stopVideoHandler(e: MouseEvent<HTMLButtonElement>) {
-    e.preventDefault();
-    console.log('stop Video');
-    this.stopVideo();
-  }
+  // stopVideoHandler(e: MouseEvent<HTMLButtonElement>) {
+  //   e.preventDefault();
+  //   console.log('stop Video');
+  //   this.stopVideo();
+  // }
 
-  stopVideo() {
-    if (this.localStream) {
-      this.localStream.getTracks().forEach(track => track.stop());
-      this.localStream = null;
-      this.setState({ playing: false });
-    }
-  }
+  // stopVideo() {
+  //   if (this.localStream) {
+  //     this.localStream.getTracks().forEach(track => track.stop());
+  //     this.localStream = null;
+  //     this.setState({ playing: false });
+  //   }
+  // }
 
   // -----------------
   connect(e: MouseEvent<HTMLButtonElement>) {
@@ -172,13 +172,13 @@ class App extends React.Component {
       options.signalingKey = this.state.signalingKey;
     }
 
-    options.video.codec = this.state.videoCodec;
+    // -- recvonly, so DO NOT specify codec --
+    //options.video.codec = this.state.videoCodec;
 
     // (signalingUrl: string, roomId: string, options: ConnectionOptions, debug: boolean, isRelay: boolean)
     console.log('connecting roomId=%s key=%s', this.state.roomId, options.signalingKey);
     console.log('Ayame connect options:', options);
     this.conn = AyameConnection(signalingUrl, this.state.roomId, options);
-    //this.conn.on('open', ({ authzMetadata }) => console.log('auth:', authzMetadata));
     this.conn.on('open', (e: any) => console.log('auth:', e.authzMetadata));
     this.conn.on('disconnect', (e: any) => {
       console.log('disconnected:', e);
@@ -226,34 +226,42 @@ class App extends React.Component {
     this.setState({ signalingKey: e.target.value });
   }
 
-  handleCodecChange(e: React.ChangeEvent<HTMLSelectElement>) {
-    this.setState({ videoCodec: e.target.value });
-  }
+  // handleCodecChange(e: React.ChangeEvent<HTMLSelectElement>) {
+  //   this.setState({ videoCodec: e.target.value });
+  // }
 
   // -----------------
   render() {
     console.log('App render()');
     return (
       <div className="App" >
-        React Ayame-Lite example<br />
-        Video Codec:
-        <select value={this.state.videoCodec} onChange={this.handleCodecChange} disabled={this.state.connected} >
-          <option value="VP8">VP8</option>
-          <option value="VP9">VP9</option>
-          <option value="H264">H264</option>
-        </select>
-        &nbsp;
-        <button onClick={this.startVideoHandler} disabled={this.state.playing || this.state.connected}> Start Video</button >
-        <button onClick={this.stopVideoHandler} disabled={!this.state.playing || this.state.connected}>Stop Video</button>
-        <br />
+        React-TS Ayame-Labo RecvOnly<br />
+        {
+          /*
+          Video Codec:
+          <select value={this.state.videoCodec} onChange={this.handleCodecChange} disabled={this.state.connected} >
+            <option value="VP8">VP8</option>
+            <option value="VP9">VP9</option>
+            <option value="H264">H264</option>
+          </select>
+          &nbsp;
+          <button onClick={this.startVideoHandler} disabled={this.state.playing || this.state.connected}> Start Video</button >
+          <button onClick={this.stopVideoHandler} disabled={!this.state.playing || this.state.connected}>Stop Video</button>
+          <br />
+          */
+        }
         SignalingKey: <input id="signaling_key" type="text" value={this.state.signalingKey} onChange={this.handleKeyChange} disabled={this.state.connected}></input>
         <br />
         Room: <input id="room_id" type="text" value={this.state.roomId} onChange={this.handleRoomChange} disabled={this.state.connected}></input>
-        <button onClick={this.connect} disabled={this.state.connected || !this.state.playing}> Connect</button >
+        <button onClick={this.connect} disabled={this.state.connected}> Connect</button >
         <button onClick={this.disconnect} disabled={!this.state.connected}>Disconnect</button>
         <div className="VideoContainer">
-          <Video id={"local_video"} width={"160px"} height={"120px"} stream={this.localStream}>
-          </Video>
+          {
+            /*
+            <Video id={"local_video"} width={"160px"} height={"120px"} stream={this.localStream}>
+            </Video>
+            */
+          }
           <div className="RemoteContainer">
             <Video id={"remote_video"} width={"320px"} height={"240px"} volume={0.5} controls={true} stream={this.remoteStream}>
             </Video>
