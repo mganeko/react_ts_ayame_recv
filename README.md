@@ -2,7 +2,7 @@
 
 React.js and TypeScript exmaple for [Ayame Labo](https://ayame-labo.shiguredo.jp).
 
-これは WebRTCシグナリングサービスの[Ayame Labo](https://ayame-labo.shiguredo.jp) 向けの、React.js/TypeScript によるサンプルです。
+これは WebRTCシグナリングサービスの[Ayame Labo](https://ayame-labo.shiguredo.jp) 向けの、React.js/TypeScript によるサンプルです。受信専用として動作します。
 
 - [ayame-web-sdk](https://github.com/OpenAyame/ayame-web-sdk) を利用しています(Apache 2.0 ライセンス)
 
@@ -21,7 +21,7 @@ React.js and TypeScript exmaple for [Ayame Labo](https://ayame-labo.shiguredo.jp
 ## GitHub Pages で実行
 
 送信側
-- ブラウザを起動、 https://mganeko.github.io/reactjs_ayame/ にアクセス
+- ブラウザを起動、 https://mganeko.github.io/react_ts_ayame/ にアクセス
 - SignalingKey: に Ayame Labo のシグナリングキーを入力
 - Room: にルーム名(Channel名)を入力
   - Username@RoomID の形式 
@@ -47,9 +47,9 @@ URLを次の形式で指定することで、シグナリングキーとルー�
 - $ cd react_ts_ayame_recv
 - $ npm install 
 - $ npm start
-- http:localhost:3000 にブラウザでアクセス
+- http://localhost:3000 にブラウザでアクセス
 - その後は GitHub Pages の例と同様 
-- ※送信側は、  https://github.com/mganeko/reactjs_ayame.git をクローンして利用
+- ※送信側は、  https://github.com/mganeko/react_ts_ayame.git をクローンして利用
 
 ## 自分のサーバーで実行
 
@@ -60,7 +60,7 @@ URLを次の形式で指定することで、シグナリングキーとルー�
 - build/ 以下をWebサーバーに配置(要https)
 - 配置したWebサーバーにブラウザーでアクセス
 - その後は GitHub Pages の例と同様 
-- ※送信側は、  https://github.com/mganeko/reactjs_ayame.git をクローンして利用
+- ※送信側は、  https://github.com/mganeko/react_ts_ayame.git をクローンして利用
 
 
 
