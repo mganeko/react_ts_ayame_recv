@@ -7,16 +7,6 @@ import { MouseEvent } from 'react';
 
 import './index.css';
 
-// ---- TODO -----
-//  - DONE:roomID (DONE:input, DONE:url)
-//  - DONE: signalingKey (DONE:input, DONE:url)
-//  - DONE: codec (DONE:video, NO:audio)
-//  - DONE: button enable/disable control
-//  - DONE: github actions for deploy github pages
-//  - DONE: inline
-//  - DONE: volume
-//  - DONE: controls
-
 // ------ params -----
 const signalingUrl = 'wss://ayame-labo.shiguredo.jp/signaling';
 let signalingKey = '';
@@ -24,16 +14,13 @@ const keyFromUrl = getKeyFromUrl();
 if (keyFromUrl && (keyFromUrl !== '')) {
   signalingKey = keyFromUrl;
 }
-let roomId = 'mm-react-ayame-test';
+let roomId = 'react-ayame-test';
 const roomFromUrl = getRoomFromUrl();
 if (roomFromUrl && (roomFromUrl !== '')) {
   roomId = roomFromUrl;
 }
 
-let clientId = uuidv4(); // ⇨ '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
-//let videoCodec = null;
-//let audioCodec = null;
-//let signalingKey = null;
+let clientId = uuidv4(); // such as '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
 
 // --- Ayame options ---
 const options = defaultOptions;
@@ -67,10 +54,6 @@ function getKeyFromUrl() {
 }
 
 // ------ App class ------
-// interface SoraAppPropsInterface {
-//   text?: string;
-// }
-
 interface AyameAppStateInterface {
   playing: boolean;
   connected: boolean;
@@ -82,14 +65,14 @@ interface AyameAppStateInterface {
 }
 
 class App extends React.Component {
-  localStream: MediaStream | null;
+  //localStream: MediaStream | null;
   remoteStream: MediaStream | null;
   conn: any;
   state: AyameAppStateInterface;
 
   constructor(props: object) {
     super(props);
-    this.localStream = null;
+    //this.localStream = null;
     this.state = {
       playing: false,
       connected: false,
@@ -100,14 +83,10 @@ class App extends React.Component {
     };
 
     // This binding is necessary to make `this` work in the callback
-    //this.startVideoHandler = this.startVideoHandler.bind(this);
-    //this.stopVideoHandler = this.stopVideoHandler.bind(this);
-    //this.stopVideo = this.stopVideo.bind(this);
     this.connect = this.connect.bind(this);
     this.disconnect = this.disconnect.bind(this);
     this.handleRoomChange = this.handleRoomChange.bind(this);
     this.handleKeyChange = this.handleKeyChange.bind(this);
-    //this.handleCodecChange = this.handleCodecChange.bind(this);
 
     // -- Ayame connection --
     this.conn = null;
@@ -125,38 +104,6 @@ class App extends React.Component {
     // }
   }
 
-  // -----------
-
-  // startVideoHandler(e: MouseEvent<HTMLButtonElement>) {
-  //   e.preventDefault();
-  //   console.log('start Video');
-  //   if (this.localStream) {
-  //     console.warn('localVideo ALREADY started');
-  //     return;
-  //   }
-
-  //   const constraints = { video: true, audio: true };
-  //   navigator.mediaDevices.getUserMedia(constraints)
-  //     .then(stream => {
-  //       this.localStream = stream;
-  //       this.setState({ playing: true });
-  //     })
-  //     .catch(err => console.error('media ERROR:', err));
-  // }
-
-  // stopVideoHandler(e: MouseEvent<HTMLButtonElement>) {
-  //   e.preventDefault();
-  //   console.log('stop Video');
-  //   this.stopVideo();
-  // }
-
-  // stopVideo() {
-  //   if (this.localStream) {
-  //     this.localStream.getTracks().forEach(track => track.stop());
-  //     this.localStream = null;
-  //     this.setState({ playing: false });
-  //   }
-  // }
 
   // -----------------
   connect(e: MouseEvent<HTMLButtonElement>) {
@@ -194,7 +141,7 @@ class App extends React.Component {
       this.remoteStream = null;
       this.setState({ gotRemoteStream: false });
     });
-    this.conn.connect(this.localStream)
+    this.conn.connect(null)
       .then(() => {
         console.log('connected');
         this.setState({ connected: true });
@@ -225,10 +172,6 @@ class App extends React.Component {
   handleKeyChange(e: React.ChangeEvent<HTMLInputElement>) {
     this.setState({ signalingKey: e.target.value });
   }
-
-  // handleCodecChange(e: React.ChangeEvent<HTMLSelectElement>) {
-  //   this.setState({ videoCodec: e.target.value });
-  // }
 
   // -----------------
   render() {
